@@ -1,0 +1,12 @@
+{
+  "setup_sql": "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id TEXT, amount INTEGER); INSERT INTO orders VALUES (1, 'ada', 10), (2, 'ada', 20), (3, 'lin', 7); CREATE TABLE notes (order_id INTEGER, note TEXT); INSERT INTO notes VALUES (1, 'first'), (1, 'second'), (2, 'third');",
+  "cases": [
+    {
+      "id": "revenue_by_customer",
+      "question": "What is the total order revenue for each customer?",
+      "sql": "SELECT customer_id, SUM(amount) AS revenue FROM orders GROUP BY customer_id ORDER BY customer_id",
+      "expected_columns": ["customer_id", "revenue"],
+      "expected_rows": [["ada", 30], ["lin", 7]]
+    }
+  ]
+}
